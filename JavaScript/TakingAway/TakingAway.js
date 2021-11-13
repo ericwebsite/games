@@ -31,7 +31,11 @@ function draw(){
             scene = 2;
         }
     }else if(scene == 2){
-        fill(2, 2, 2);
-        rect(-1, -1, 100, 100)
+        for(var i = 0; i < 20; i++){
+            for(var j = 0; j < 20; j++){
+                fill(grid[i][j][1], grid[i][j][2], grid[i][j][3]);
+                rect(i * 20, j * 20, 20, 20);
+            }
+        }
     }
 }
