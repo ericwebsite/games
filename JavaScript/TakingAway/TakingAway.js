@@ -33,8 +33,9 @@ function draw(){
     }else if(scene == 2){
         for(var i = 0; i < 20; i++){
             for(var j = 0; j < 20; j++){
-                fill(grid[i][j][1], grid[i][j][2], grid[i][j][3]);
-                rect(i * 20, j * 20, 20, 20);
+                fill(grid[i][j]);
+                noStroke();
+                rect(i * 30, j * 30, 30, 30);
             }
         }
     }
