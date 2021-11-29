@@ -29,8 +29,14 @@ function draw(){
         text("Play! ", 130, 350);
         if(mouseX > 10 && mouseX < 295 && mouseY > 300 && mouseY < 390 && mouseIsPressed){
             scene = 2;
+            setitup = true;
         }
     }else if(scene == 2){
+        if(normalLevel == 1){
+            grid[9][9] = color(255, 0, 0);
+            grid[10][9] = color(255, 0, 0);
+            grid[11][9] = color(255, 0, 0);
+        }
         for(var i = 0; i < 20; i++){
             for(var j = 0; j < 20; j++){
                 fill(grid[i][j]);
@@ -38,5 +44,14 @@ function draw(){
                 rect(i * 30, j * 30, 30, 30);
             }
         }
-    }
+        scene = 3;
+    }else if(scene = 3){
+        for(var i = 0; i < 20; i++){
+            for(var j = 0; j < 20; j++){
+                fill(grid[i][j]);
+                noStroke();
+                rect(i * 30, j * 30, 30, 30);
+            }
+        }
+    };
 }
