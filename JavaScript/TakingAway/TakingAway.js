@@ -31,6 +31,7 @@ function setup(){
 
 function draw(){
     if(scene == 1){//Home, may have present mode and special mode later on. 
+        selectedColorTo = color(255, 255, 0);
         fill(0, 146, 14);
         rect(-10, -10, 1000, 1000);
         fill(128, 64, 0);
@@ -42,7 +43,7 @@ function draw(){
             scene = 2;
             setitup = true;
         }
-    }else if(scene == 2){ //setup yummy normals. 
+    }else if(scene == 2){ //setup normals. 
         if(normalLevel == 1){
             grid[9][9] = color(255, 0, 0);
             grid[9][10] = color(255, 0, 0);
@@ -54,22 +55,15 @@ function draw(){
             grid[11][10] = color(0, 255, 0);
             grid[11][11] = color(0, 255, 0);
         }
-        for(var i = 0; i < 20; i++){//render
-            for(var j = 0; j < 20; j++){
-                fill(grid[i][j]);
-                noStroke();
-                rect(i * 30, j * 30, 30, 30);
-            }
-        }
         scene = 3;
     }else if(scene = 3){ //rerender
-        xGrid = mouseX % 30;
-        yGrid = mouseY % 30;
-        if(!(grid[xGrid][yGrid] == color(0, 0, 0))){
+        xGrid = Math.floor(mouseX / 30);
+        yGrid = Math.floor(mouseY / 30);
+        if(xGrid <= 19 && xGrid >= 0 && yGrid <= 19 && yGrid >= 0 && (!(color(0, 0, 0) == grid[xGrid][yGrid]))){
             selectedColorFrom = grid[xGrid][yGrid];
             for(var i = 0; i < 20; i++){
                 for(var j = 0; j < 20; j++){
-                    if(grid[i][j] == selectedColorFrom){
+                    if(grid[i][j].equals(selectedColorFrom)){
                         fill(selectedColorTo);
                     }else{
                         fill(grid[i][j]);
@@ -88,5 +82,7 @@ function draw(){
                 }
             }
         }
+        fill(255, 255, 255);
+        text(xGrid + ", " + yGrid, 100, 500);
     };
 }
