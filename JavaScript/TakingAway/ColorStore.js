@@ -1,0 +1,5 @@
+class ColorStore{
+    ColorStore() {
+        r = 
+    }
+}

@@ -6,7 +6,9 @@ var scene = 1;
 var normalLevel = 1;
 var xAni = 0;
 
-var selectedColorFrom = null;
+var selectedColorR;
+var selectedColorG;
+var selectedColorB;
 var selectedColorTo = color(255, 255, 0);
 
 var xGrid;
@@ -16,13 +18,13 @@ function setup(){
     createCanvas(601, 601);
     background(64, 255, 128);
     text("Loading", 10, 310);
-    for(var i = 0; i < 20; i++){
+    /*for(var i = 0; i < 20; i++){
        gridLine[i] = color(0, 0, 0);
        grid[i] = {};
-    }
+    }*/
     for(var i = 0; i < 20; i++){
         for (var j = 0; j < 20; j++) {
-          grid[i][j] = color(0, 0, 0);
+          grid[i][j] = [0, 0, 0];
         }
     }
     scene = 1;
@@ -45,28 +47,30 @@ function draw(){
         }
     }else if(scene == 2){ //setup normals. 
         if(normalLevel == 1){
-            grid[9][9] = color(255, 0, 0);
-            grid[9][10] = color(255, 0, 0);
-            grid[9][11] = color(255, 0, 0);
-            grid[10][9] = color(0, 255, 0);
-            grid[10][10] = color(0, 255, 0);
-            grid[10][11] = color(0, 255, 0);
-            grid[11][9] = color(0, 255, 0);
-            grid[11][10] = color(0, 255, 0);
-            grid[11][11] = color(0, 255, 0);
+            grid[9][9] = [255, 0, 0];
+            grid[9][10] = [255, 0, 0];
+            grid[9][11] = [255, 0, 0];
+            grid[10][9] = [0, 255, 0];
+            grid[10][10] = [0, 255, 0];
+            grid[10][11] = [0, 255, 0];
+            grid[11][9] = [0, 255, 0];
+            grid[11][10] = [0, 255, 0];
+            grid[11][11] = [0, 255, 0];
         }
         scene = 3;
     }else if(scene = 3){ //rerender
         xGrid = Math.floor(mouseX / 30);
         yGrid = Math.floor(mouseY / 30);
-        if(xGrid <= 19 && xGrid >= 0 && yGrid <= 19 && yGrid >= 0 && (!(color(0, 0, 0) == grid[xGrid][yGrid]))){
-            selectedColorFrom = grid[xGrid][yGrid];
+        if(xGrid <= 19 && xGrid >= 0 && yGrid <= 19 && yGrid >= 0 && (!(0 == grid[xGrid][yGrid][0] && grid[xGrid][yGrid][1] == grid[xGrid][yGrid][2] && grid[xGrid][yGrid][0] == grid[xGrid][yGrid][1]))){
+            selectedColorR = grid[xGrid][yGrid][0];
+            selectedColorG = grid[xGrid][yGrid][1];
+            selectedColorB = grid[xGrid][yGrid][2];
             for(var i = 0; i < 20; i++){
                 for(var j = 0; j < 20; j++){
-                    if(grid[i][j].equals(selectedColorFrom)){
+                    if(grid[i][j][1] == selectedColorR){
                         fill(selectedColorTo);
                     }else{
-                        fill(grid[i][j]);
+                        fill(grid[i][j][0], grid[i][j][1], grid[i][j][2]);
                     }
                     noStroke();
                     rect(i * 30, j * 30, 30, 30);
@@ -76,7 +80,7 @@ function draw(){
             selectedColorFrom = null;
             for(var i = 0; i < 20; i++){
                 for(var j = 0; j < 20; j++){
-                    fill(grid[i][j]);
+                    fill(grid[i][j][0], grid[i][j][1], grid[i][j][2]);
                     noStroke();
                     rect(i * 30, j * 30, 30, 30);
                 }
